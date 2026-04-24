@@ -1,0 +1,310 @@
+:root {
+  --primary: #9d4edd;
+  --secondary: #ff758f;
+  --bg-dark: #0f1016;
+  --surface: rgba(255, 255, 255, 0.05);
+  --surface-border: rgba(255, 255, 255, 0.1);
+  --text: #f8f9fa;
+  --success: #38b000;
+  --error: #d90429;
+  --line-gap: 20px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Background animated blobs */
+.background-mesh {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+.blob {
+  position: absolute;
+  filter: blur(80px);
+  border-radius: 50%;
+  animation: float 15s infinite ease-in-out alternate;
+}
+.blob-1 {
+  width: 400px; height: 400px;
+  background: rgba(157, 78, 221, 0.4);
+  top: -10%; left: -10%;
+}
+.blob-2 {
+  width: 300px; height: 300px;
+  background: rgba(255, 117, 143, 0.3);
+  bottom: -10%; right: -5%;
+  animation-delay: -5s;
+}
+.blob-3 {
+  width: 350px; height: 350px;
+  background: rgba(0, 180, 216, 0.3);
+  top: 40%; left: 40%;
+  animation-delay: -10s;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(50px, 30px) scale(1.1); }
+}
+
+.z-elevate {
+  position: relative;
+  z-index: 10;
+}
+
+.app-container {
+  background: var(--surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--surface-border);
+  border-radius: 24px;
+  padding: 40px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  z-index: 1;
+}
+
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--surface-border);
+  padding-bottom: 15px;
+}
+
+.quiz-header h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #fff, #ff758f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.score-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  background: rgba(0,0,0,0.3);
+  padding: 8px 16px;
+  border-radius: 20px;
+}
+.score-value {
+  color: var(--secondary);
+  font-size: 1.2rem;
+}
+
+/* Staff area */
+.staff-container {
+  width: 100%;
+  padding: 40px 0;
+  display: flex;
+  justify-content: center;
+  background: rgba(0,0,0,0.2);
+  border-radius: 12px;
+}
+
+.staff {
+  position: relative;
+  width: 80%;
+  height: calc(var(--line-gap) * 4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.staff-line {
+  width: 100%;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.clef {
+  position: absolute;
+  left: -20px;
+  top: -26px; /* Ajust to align nicely */
+  font-family: 'Noto Music', sans-serif;
+  font-size: 75px;
+  color: rgba(255, 255, 255, 0.85);
+  pointer-events: none;
+}
+
+/* Notes and Rests */
+.note-box {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: top 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.2s;
+  /* Top value will be injected via JS */
+}
+
+/* Note visual (the head and stem) */
+.note-head {
+  width: 22px;
+  height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  transform: rotate(-25deg);
+  position: relative;
+  box-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+.stem-up::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 50%;
+  width: 2px;
+  height: 45px;
+  background: #fff;
+  transform: rotate(25deg);
+  transform-origin: bottom right;
+}
+
+.stem-down::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 2px;
+  height: 45px;
+  background: #fff;
+  transform: rotate(25deg);
+  transform-origin: top left;
+}
+
+.ledger-line::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: -1;
+}
+
+/* Rest styling */
+.rest-symbol {
+  font-family: 'Noto Music', sans-serif;
+  font-size: 50px;
+  line-height: 0;
+  position: absolute;
+  top: -10px;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+.btn-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+@media (max-width: 480px) {
+  .app-container {
+    padding: 25px 15px;
+    gap: 25px;
+    width: 95%;
+  }
+  .staff-container {
+    padding: 30px 0;
+  }
+  .staff {
+    width: 90%;
+  }
+  .clef {
+    font-size: 65px;
+    left: -10px;
+    top: -20px;
+  }
+  .quiz-header h1 {
+    font-size: 1.25rem;
+  }
+  .ans-btn {
+    flex: 1 1 calc(33% - 15px);
+    padding: 12px 5px;
+    font-size: 1rem;
+  }
+}
+
+.ans-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--surface-border);
+  color: var(--text);
+  padding: 15px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
+.ans-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.ans-btn.correct {
+  background: var(--success);
+  border-color: var(--success);
+  box-shadow: 0 0 15px var(--success);
+}
+
+.ans-btn.wrong {
+  background: var(--error);
+  border-color: var(--error);
+  animation: shake 0.4s;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+}
+
+.feedback-message {
+  text-align: center;
+  height: 24px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.feedback-message.show-correct {
+  color: var(--success);
+  opacity: 1;
+}
+
+.feedback-message.show-wrong {
+  color: var(--error);
+  opacity: 1;
+}

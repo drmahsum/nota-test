@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nota Quiz - Sonsuz Mod</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Music&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="background-mesh">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <main class="app-container">
+    <header class="quiz-header">
+      <h1>Nota Quiz</h1>
+      <div class="score-container">
+        <span class="score-label">Puan:</span>
+        <span id="score" class="score-value">0</span>
+      </div>
+    </header>
+
+    <div class="staff-container z-elevate">
+      <div class="staff">
+        <!-- 5 dizek çizgisi -->
+        <div class="staff-line"></div>
+        <div class="staff-line"></div>
+        <div class="staff-line"></div>
+        <div class="staff-line"></div>
+        <div class="staff-line"></div>
+        
+        <!-- Sol anahtarı -->
+        <div class="clef">&#119070;</div>
+        
+        <!-- Uzerine eklenecek Dinamik Nota/Es Yeri -->
+        <div id="note-display" class="note-box"></div>
+      </div>
+    </div>
+
+    <!-- Feedback animasyonu icin gerekli alan (Dogru/Yanlis iconu) -->
+    <div id="feedback-message" class="feedback-message"></div>
+
+    <div class="controls z-elevate">
+      <div class="btn-grid">
+        <button class="ans-btn" data-note="Do">Do</button>
+        <button class="ans-btn" data-note="Re">Re</button>
+        <button class="ans-btn" data-note="Mi">Mi</button>
+        <button class="ans-btn" data-note="Fa">Fa</button>
+        <button class="ans-btn" data-note="Sol">Sol</button>
+        <button class="ans-btn" data-note="La">La</button>
+        <button class="ans-btn" data-note="Si">Si</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
