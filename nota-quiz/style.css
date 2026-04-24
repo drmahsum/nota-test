@@ -225,8 +225,29 @@ body {
 }
 
 @media (max-width: 480px) {
+  .app-container {
+    padding: 25px 15px;
+    gap: 25px;
+    width: 95%;
+  }
+  .staff-container {
+    padding: 30px 0;
+  }
+  .staff {
+    width: 90%;
+  }
+  .clef {
+    font-size: 65px;
+    left: -10px;
+    top: -20px;
+  }
+  .quiz-header h1 {
+    font-size: 1.25rem;
+  }
   .ans-btn {
     flex: 1 1 calc(33% - 15px);
+    padding: 12px 5px;
+    font-size: 1rem;
   }
 }
 
